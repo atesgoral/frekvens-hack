@@ -33,10 +33,12 @@ gpioB.setValue(1)
 gpioLatch.setValue(0)
 gpioClock.setValue(0)
 
+f = 0
+
 while True:
     for y in range(0, 16):
         for x in range(0, 16):
-            gpioData.setValue(y & x & 1)
+            gpioData.setValue(y & 1)
 
             gpioClock.setValue(1)
             time.sleep(1.0 / 1000)
@@ -47,5 +49,11 @@ while True:
     time.sleep(1.0 / 1000)
     gpioLatch.setValue(0)
     time.sleep(1.0 / 1000)
+
+    f = f + 1
+
+    gpioR.setValue(f & 1)
+    gpioG.setValue(f >> 1 & 1)
+    gpioB.setValue(f >> 2 & 1)
 
     time.sleep(10.0 / 1000)
