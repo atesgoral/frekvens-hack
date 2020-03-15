@@ -29,27 +29,20 @@ gpioData = onionGpio.OnionGpio(pinData)
 
 # atexit.register(exit_handler)
 
-gpioR.setOutputDirection()
-gpioG.setOutputDirection()
-gpioB.setOutputDirection()
+gpioR.setOutputDirection(1)
+gpioG.setOutputDirection(1)
+gpioB.setOutputDirection(1)
 
-gpioLatch.setOutputDirection()
-gpioClock.setOutputDirection()
-gpioData.setOutputDirection()
-
-gpioR.setValue(1)
-gpioG.setValue(1)
-gpioB.setValue(1)
-
-gpioLatch.setValue(0)
-gpioClock.setValue(0)
+gpioLatch.setOutputDirection(0)
+gpioClock.setOutputDirection(0)
+gpioData.setOutputDirection(0)
 
 f = 0
 
 while True:
     for y in range(0, 16):
         for x in range(0, 16):
-            gpioData.setValue(y & 1)
+            gpioData.setValue(x & y & 1)
 
             gpioClock.setValue(1)
             time.sleep(1.0 / 1000)
