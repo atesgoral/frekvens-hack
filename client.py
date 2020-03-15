@@ -1,4 +1,5 @@
 import time
+import atexit
 
 import onionGpio
 
@@ -17,6 +18,16 @@ gpioB = onionGpio.OnionGpio(pinB)
 gpioLatch = onionGpio.OnionGpio(pinLatch)
 gpioClock = onionGpio.OnionGpio(pinClock)
 gpioData = onionGpio.OnionGpio(pinData)
+
+def exit_handler():
+    gpioR._freeGpio()
+    gpioG._freeGpio()
+    gpioB._freeGpio()
+    gpioLatch._freeGpio()
+    gpioClock._freeGpio()
+    gpioData._freeGpio()
+
+atexit.register(exit_handler)
 
 gpioR.setOutputDirection()
 gpioG.setOutputDirection()
