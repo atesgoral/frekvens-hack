@@ -39,13 +39,13 @@ while True:
             gpioData.setValue(y & x & 1)
 
             gpioClock.setValue(1)
-            time.sleep(1.0 / 1000000)
+            time.sleep(1.0 / 1000)
             gpioClock.setValue(0)
-            time.sleep(1.0 / 1000000)
+            time.sleep(1.0 / 1000)
 
     gpioLatch.setValue(1)
-    time.sleep(1.0 / 1000000)
+    time.sleep(1.0 / 1000)
     gpioLatch.setValue(0)
-    time.sleep(1.0 / 1000000)
+    time.sleep(1.0 / 1000)
 
     time.sleep(10.0 / 1000)
