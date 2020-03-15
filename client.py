@@ -1,3 +1,5 @@
+import time
+
 import onionGpio
 
 pinR = 17
@@ -24,6 +26,26 @@ gpioLatch.setOutputDirection()
 gpioClock.setOutputDirection()
 gpioData.setOutputDirection()
 
-gpioR.setValue(0)
+gpioR.setValue(1)
 gpioG.setValue(1)
-gpioB.setValue(0)
+gpioB.setValue(1)
+
+gpioLatch.setValue(0)
+gpioClock.setValue(0)
+
+while True:
+    for y in range(0, 16):
+        for x in range(0, 16):
+            gpioData.setValue(y & x & 1)
+
+            gpioClock.setValue(1)
+            time.sleep(1.0 / 1000000)
+            gpioClock.setValue(0)
+            time.sleep(1.0 / 1000000)
+
+    gpioLatch.setValue(1)
+    time.sleep(1.0 / 1000000)
+    gpioLatch.setValue(0)
+    time.sleep(1.0 / 1000000)
+
+    time.sleep(10.0 / 1000)
